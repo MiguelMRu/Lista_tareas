@@ -1,13 +1,52 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/javascript.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <link rel="stylesheet" href="/src/style.css">
+    <script type="module" src="/src/main.js" defer></script>
+    <title>To Do App</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+
+    <main>
+      <section id="to-do">
+        <header class="encabezado">
+          <h2>TO DO</h2>
+          <button type="button">
+            <img src="/public/add.svg" alt="add task">
+          </button>
+        </header>
+        <article>
+          
+        </article>
+      </section>
+
+      <section id="in-progress">
+        <header class="encabezado">
+          <h2>IN PROGRESS</h2>
+          <button type="button">
+            <img src="/public/add.svg" alt="add task">
+          </button>
+        </header>
+        <article>
+          
+        </article>
+      </section>
+
+      <section id="done">
+        <header class="encabezado">
+          <h2>DONE</h2>
+          <button type="button">
+            <img src="/public/add.svg" alt="add task">
+          </button>
+        </header>
+        <article>
+          
+        </article>
+      </section>
+
+    </main>
   </body>
 </html>
