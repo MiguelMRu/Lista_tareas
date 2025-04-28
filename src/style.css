@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body{
@@ -20,22 +21,27 @@ main{
   gap: 10px;
   flex-wrap: wrap;
   margin: 5px;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 
 }
 
 section {
   border: 1px solid black;
-  border-radius: 5px;
-  box-shadow: 5px 2px 5px rgba(22, 22, 63, 0.8);
+  border-radius: 10px;
+  box-shadow: 7px 5px 5px rgb(63 63 101 / 80%);
   height: 100%;
   width: 20%;
   background-color: white;
   overflow-y: scroll;
   position: relative;
-  
+  display: flex;
+  flex-direction: column;
+  gap: 10px;  
+  scrollbar-gutter
+  : none;
 }
+
 
 
 .encabezado {
@@ -44,7 +50,7 @@ section {
   padding: 15px;
   /*border-bottom: 0.2px solid #3aa2df;*/
   position: relative;
-  flex-wrap: wrap;
+  flex-wrap: balance;
   position: sticky;
   top: 0px;
   
@@ -66,6 +72,7 @@ h2{
   display: inline;
   flex: none;
   margin: 0 auto;
+  text-wrap: wrap;
 }
 
 button{
@@ -78,8 +85,12 @@ button{
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  box-sizing: border-box;
   
+  
+}
+
+button:active{
+  transform: scale(.9);
 }
 
 img{
@@ -89,33 +100,26 @@ img{
   /*padding: 2px;*/
 }
 
-article{
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  align-items: center;
-  justify-content: space-between;
-  
-}
 
-section::-webkit-scrollbar {
-  display: none;
-}
 
 
 .tasks{
-  width: 80%;
-  min-height: 50px;
+  width: 95%;
   height: fit-content;
   border: 1px solid black;
   margin: 5px;
-  animation: aparition 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-
+  animation: aparition 0.3s ease-in;
+  border-radius: 10px;
+  margin: 0 auto;
+  /*cursor: grab;*/
 }
+
+
+
 
 @keyframes aparition {
   from {
-      transform: scale(0.5);
+      transform: scale(0.7);
   }
 
   to {
