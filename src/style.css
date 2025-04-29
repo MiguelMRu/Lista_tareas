@@ -28,21 +28,32 @@ main{
 }
 
 section {
-  border: 1px solid black;
-  border-radius: 10px;
-  box-shadow: 7px 5px 5px rgb(63 63 101 / 80%);
+  border-radius: 25px;
+  box-shadow: 4px 3px 5px rgba(82, 81, 81, 0.8);
   height: 100%;
   width: 20%;
-  background-color: white;
   overflow-y: scroll;
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;  
+  gap: 10px;
+  color: #ffffff;
 }
 
 section::-webkit-scrollbar{
   display: none;
+}
+/*hacer colores algo más oscuros*/
+#to-do{
+  background-color: #e46b91;
+}
+
+#in-progress{
+  background-color: #6982ca; /*hacer colores algo más oscuros*/
+}
+
+#done{
+  background-color: #65d865; /*hacer colores algo más oscuros*/
 }
 
 .encabezado {
@@ -51,22 +62,13 @@ section::-webkit-scrollbar{
   padding: 15px;
   /*border-bottom: 0.2px solid #3aa2df;*/
   position: relative;
-  flex-wrap: balance;
+  flex-wrap: wrap;
   position: sticky;
   top: 0px;
+  text-wrap: balance;
   
 }
 
-header::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px; /* alto máximo del borde */
-  background: linear-gradient(to right, transparent, #3aa2df 50%, transparent);
-  pointer-events: none;
-}
 
 
 h2{
@@ -77,17 +79,15 @@ h2{
 }
 
 button{
-  background-color: transparent;
-  border-radius: 10px;
-  border: 1px solid black;
+  background-color: #000000;
   height: 30px;
   width: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  
-  
+  border-radius: 50%;
+  border: none;
 }
 
 button:active{
@@ -103,11 +103,9 @@ img{
 
 
 
-
 .tasks{
   width: 95%;
   height: fit-content;
-  border: 1px solid black;
   margin: 5px;
   animation: aparition 0.3s cubic-bezier(0, 0, 0.41, 1.02);
   border-radius: 10px;
@@ -117,35 +115,47 @@ img{
   flex-direction: column;
   gap: 10px;
   padding: 5px;
+  cursor: grab;
+  background-color: #ffffff;
+  color: #1a1919;
 }
 
 .tasks button{
   align-self: flex-end;
   width: fit-content;
   padding: 5px 15px 5px 15px;
-  background-color: #e42020;
+  /*background-color: #e42020;*/
+  background-color: #1a1919;
   color: #ffffff;
   border-radius: 7px;
   font-weight: bold;
   font-size: .88em;
-
+  cursor: pointer;
 }
+
+.tasks h3, .tasks p{
+  cursor: text;
+}
+
 
 [contenteditable = "true"]:active,
 [contenteditable = "true"]:focus{
   color: #a1a1a1;
-  padding: .5em;
-  background: #ffffff;
-  border: 1px solid #999;
+  border: none;
+  outline: none;
+  border: 1px solid #fff;
+  border-radius: 7px;
 }
 
 @keyframes aparition {
   from {
       transform: scale(0.8);
+      opacity: 0.5;
   }
 
   to {
     transform: scale(1);
+    opacity: 1;
   }
 
 }
