@@ -11,7 +11,8 @@ body{
   height: 100%;
   width: 100%;
   margin: 40px 0 40px 0;
-  background-color:  #3aa2df;
+  background-color:  #f6fafc;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 main{
@@ -38,11 +39,11 @@ section {
   display: flex;
   flex-direction: column;
   gap: 10px;  
-  scrollbar-gutter
-  : none;
 }
 
-
+section::-webkit-scrollbar{
+  display: none;
+}
 
 .encabezado {
   display: flex;
@@ -108,18 +109,39 @@ img{
   height: fit-content;
   border: 1px solid black;
   margin: 5px;
-  animation: aparition 0.3s ease-in;
+  animation: aparition 0.3s cubic-bezier(0, 0, 0.41, 1.02);
   border-radius: 10px;
   margin: 0 auto;
   /*cursor: grab;*/
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5px;
 }
 
+.tasks button{
+  align-self: flex-end;
+  width: fit-content;
+  padding: 5px 15px 5px 15px;
+  background-color: #e42020;
+  color: #ffffff;
+  border-radius: 7px;
+  font-weight: bold;
+  font-size: .88em;
 
+}
 
+[contenteditable = "true"]:active,
+[contenteditable = "true"]:focus{
+  color: #a1a1a1;
+  padding: .5em;
+  background: #ffffff;
+  border: 1px solid #999;
+}
 
 @keyframes aparition {
   from {
-      transform: scale(0.7);
+      transform: scale(0.8);
   }
 
   to {

@@ -1,14 +1,6 @@
 // añadimos las tareas
 
-const buttonToDo = document.getElementById('boton-todo') 
-const todo = document.getElementById('to-do')
-
-
-const buttonInProgress = document.getElementById('boton-progress') 
-const inProgress = document.getElementById('in-progress')
-
-const done = document.getElementById('done')
-
+const addTaskButton = document.querySelectorAll('.add-task')
 
 // Función para crear una nueva tarea
 function createTask() {
@@ -39,13 +31,10 @@ function createTask() {
 
 
 
-
-buttonToDo.addEventListener('click', () => {
-    const task = createTask();
-    todo.append(task);
-});
-
-buttonInProgress.addEventListener('click', () => {
-    const task = createTask();
-    inProgress.append(task);
+addTaskButton.forEach((button) => {
+    button.addEventListener('click', () => {
+        const task = createTask();
+        const parentDiv = button.parentElement.parentElement; // Obtener el div padre del botón
+        parentDiv.append(task); // Añadir la tarea al div padre
+    });
 });
