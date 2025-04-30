@@ -120,6 +120,13 @@ img{
   color: #1a1919;
 }
 
+.dragging{
+  cursor: grabbing;
+  background-color: #ffffff;
+  color: #1a1919;
+  scale: 1.05;
+}
+
 .tasks button{
   align-self: flex-end;
   width: fit-content;

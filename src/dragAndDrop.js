@@ -1,41 +1,40 @@
 export function dragDrop() {
-    const tasks = document.querySelectorAll('.tasks');
-    const columns = document.querySelectorAll('section');
+   
+    const columns = document.querySelectorAll('.column');
 
-    tasks.forEach(task => {
-        task.addEventListener('dragstart', dragStart);
-        task.addEventListener('dragend', dragEnd);
-    });
+
 
     columns.forEach(column => {
-        column.addEventListener('dragover', dragOver);
-        column.addEventListener('dragenter', dragEnter);
-        column.addEventListener('dragleave', dragLeave);
-        column.addEventListener('drop', handleDrop);
+        column.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            const bottomTask = insertAboverTask(column, e.clientY);
+            const draggingTask = document.querySelector('.dragging');
+            if(!bottomTask){
+                console.log(draggingTask)
+                column.appendChild(draggingTask);
+            } else {
+                bottomTask.parentNode.insertBefore(draggingTask, bottomTask);
+            }
+        });
     });
 
-    function dragStart(e) {
-        e.dataTransfer.setData('text/plain', e.target.id);
-    }
 
-    function dragEnd() {}
+    const insertAboverTask = (column, y) => {
+        const els = column.querySelectorAll('.tasks:not(.dragging)');
+        let closest = null;
+        let closestOffset = Number.NEGATIVE_INFINITY;
+        els.forEach((el) => {
+            const { top } = el.getBoundingClientRect();
+            const offset = y - top;
+            if (offset < 0 && offset > closestOffset) {
+                closestOffset = offset;
+                closest = el;
 
-    function dragOver(e) {
-        e.preventDefault();
-        e.dataTransfer.dropEffect = 'move';
-    }
-
-    function dragEnter(e) {
-        e.preventDefault();
-    }
-
-    function dragLeave() {}
-
-    function handleDrop(e) {
-        e.preventDefault();
-        const taskId = e.dataTransfer.getData('text/plain');
-        const task = document.getElementById(taskId);
-        const targetColumn = e.currentTarget;
-        targetColumn.append(task);
-    }
+            }
+        });
+        return closest;
+    };
+    
+    
 }

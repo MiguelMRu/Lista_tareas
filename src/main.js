@@ -10,6 +10,13 @@ function createTask() {
     //añadir nuevo id a la tarea segun las tareas que haya
     newDiv.setAttribute('id', 'task' + (document.querySelectorAll('.tasks').length + 1));
     newDiv.setAttribute('draggable', 'true');
+    newDiv.addEventListener('dragstart', () => {
+        newDiv.classList.add("dragging");
+    });
+    newDiv.addEventListener('dragend', () => {
+        newDiv.classList.remove("dragging");
+        saveTasks(); // Guardar tareas al mover una
+    });
 
     const divheader = document.createElement('h3');
     divheader.textContent = "Tarea...";
@@ -18,6 +25,8 @@ function createTask() {
     const divp = document.createElement('p');
     divp.textContent = "Descripción...";
     divp.setAttribute('contentEditable', 'true');
+
+
 
     // Botón para eliminar la tarea
     const deleteButton = document.createElement('button');
@@ -78,6 +87,8 @@ addTaskButton.forEach((button) => {
 });
 
 dragDrop();
+
+
 
 // Cargar tareas al cargar la página
 window.addEventListener('DOMContentLoaded', loadTasks);
