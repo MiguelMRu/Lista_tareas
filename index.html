@@ -4,14 +4,28 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/javascript.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/style.css">
     <script type="module" src="/src/main.js" defer></script>
     <title>To Do App</title>
   </head>
   <body>
+    <aside class="light-aside">
+      <nav>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+    </nav>
+    </aside>
 
     <main>
-      <section class="column" id="to-do">
+      <section class="column light-pink" id="to-do">
         <header class="encabezado">
       
           <h2>TO DO</h2>
@@ -22,7 +36,7 @@
 
       </section>
 
-      <section class="column" id="in-progress">
+      <section class="column light-blue" id="in-progress">
         <header class="encabezado">
           <h2>IN PROGRESS</h2>
           <button class="add-task" type="button">
@@ -32,7 +46,7 @@
 
       </section>
 
-      <section class="column" id="done">
+      <section class="column light-green" id="done">
         <header class="encabezado">
           <h2>DONE</h2>
         </header>
