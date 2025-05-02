@@ -10,6 +10,7 @@ function createTask() {
     //añadir nuevo id a la tarea segun las tareas que haya
     newDiv.setAttribute('id', 'task' + (document.querySelectorAll('.tasks').length + 1));
     newDiv.setAttribute('draggable', 'true');
+    // Añadir evento de arrastrar y soltar
     newDiv.addEventListener('dragstart', () => {
         newDiv.classList.add("dragging");
     });
@@ -18,6 +19,7 @@ function createTask() {
         saveTasks(); // Guardar tareas al mover una
     });
 
+    // Crear los elementos de la tarea
     const divheader = document.createElement('h3');
     divheader.textContent = "Tarea...";
     divheader.setAttribute('contentEditable', 'true');
@@ -48,6 +50,17 @@ function createTask() {
     return newDiv;
 }
 
+// Añadir evento a cada botón de añadir tarea
+addTaskButton.forEach((button) => {
+    button.addEventListener('click', () => {
+        const task = createTask();
+        const parentColumn = button.parentElement.parentElement; // Obtener el section padre de la tarea
+        parentColumn.append(task); // Añadir la tarea a la columna correspondiente
+        saveTasks(); // Guardar tareas al añadir una nueva
+    });
+});
+
+
 // Función para guardar las tareas en el localStorage
 function saveTasks() {
     const tasks = document.querySelectorAll('.tasks');
@@ -67,24 +80,15 @@ function loadTasks() {
     if (tasks) {
         tasks.forEach(task => {
             const newTask = createTask();
-            const parentDiv = document.getElementById(task.parentId); // Obtener el div padre por id
+            const taskparent = document.getElementById(task.parentId); // Obtener el div padre por id
             newTask.querySelector('h3').textContent = task.title;
             newTask.querySelector('p').textContent = task.description;
-            parentDiv.append(newTask); // Añadir la tarea al div padre
+            taskparent.append(newTask); // Añadir la tarea al div padre
 
         });
     }
 }
 
-// Añadir evento a cada botón de añadir tarea
-addTaskButton.forEach((button) => {
-    button.addEventListener('click', () => {
-        const task = createTask();
-        const parentDiv = button.parentElement.parentElement; // Obtener el section padre de la tarea
-        parentDiv.append(task); // Añadir la tarea al div padre
-        saveTasks(); // Guardar tareas al añadir una nueva
-    });
-});
 
 dragDrop();
 

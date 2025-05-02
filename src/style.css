@@ -29,12 +29,79 @@ body{
 
 }
 
-.light-aside{
+aside{
   height: 100dvh;
-  background-color: var(--light-grey);
   width: 4%;
   position: absolute;
   left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+}
+
+nav{
+  margin-top: 15px;
+  overflow: hidden;
+  height: 40px;
+  transition: height 0.3s ease-in-out;
+  interpolate-size: allow-keywords;
+
+}
+
+nav:hover{
+  height: auto;
+}
+
+.add-columns{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--button-color);
+  color: #ffffff;
+  border-radius: 10px;
+  height: 40px;
+  width: 40px;
+  margin-bottom: 5px;
+  padding: 5px;
+  margin: 0 auto 5px auto;
+}
+
+ul{
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  align-items: center;
+}
+
+li{
+  border: 1px solid black;
+  border-radius: 100%;
+  height: 30px;
+  width: 30px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.li-light-pink{
+  background-color: var(--light-pink);
+}
+.li-light-blue{
+  background-color: var(--light-blue);
+}
+.li-light-green{
+  background-color: var(--light-green);
+}
+.li-light-malva{
+  background-color: var(--light-malva);
+}
+.li-light-orange{
+  background-color: var(--light-orange);
+}
+
+aside>button{
+  align-self: center;
+  margin-bottom: 15px;
 }
 
 main{
@@ -98,6 +165,7 @@ section::-webkit-scrollbar{
   position: sticky;
   top: 0px;
   text-wrap: balance;
+  align-items: center;
 }
 
 
@@ -107,7 +175,7 @@ h2{
   flex: none;
   margin: 0 auto;
   text-wrap: balance;
-  font-size: clamp(0.1rem, 1rem, 1.5rem);
+  font-size: clamp(0.1rem, 1.2rem, 1.5rem);
 }
 
 button{
@@ -164,7 +232,7 @@ img{
   width: fit-content;
   padding: 5px 15px 5px 15px;
   /*background-color: #e42020;*/
-  background-color: #1a1919;
+  background-color: var(--button-color);
   color: #ffffff;
   border-radius: 7px;
   font-weight: bold;

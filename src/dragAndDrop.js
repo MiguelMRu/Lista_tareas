@@ -2,12 +2,9 @@ export function dragDrop() {
    
     const columns = document.querySelectorAll('.column');
 
-
-
     columns.forEach(column => {
         column.addEventListener('dragover', (e) => {
             e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
             const bottomTask = insertAboverTask(column, e.clientY);
             const draggingTask = document.querySelector('.dragging');
             if(!bottomTask){
