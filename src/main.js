@@ -89,6 +89,26 @@ function loadTasks() {
     }
 }
 
+// funcion para crear una nueva columna
+
+function createColumn(colorClass) {
+    // crear un nuevo section
+    const newColumn = document.createElement('section')
+    // darle un id
+    newColumn.setAttribute('id', 'column' + (document.querySelectorAll('.column').length + 1));
+    // darle las clases para el estilo y color
+    newColumn.setAttribute('class', 'column')
+    newColumn.setAttribute('class', colorClass)
+    // darle su contenido 
+    
+        //encabezado con el nombre
+        //boton de añadir tareas a la derecha
+        //boton de eliminar columna a la izquierda
+
+
+
+}
+
 
 dragDrop();
 

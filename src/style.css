@@ -43,14 +43,14 @@ aside{
 nav{
   margin-top: 15px;
   overflow: hidden;
-  height: 40px;
+  height: 50px;
   transition: height 0.3s ease-in-out;
   interpolate-size: allow-keywords;
 
 }
 
 nav:hover{
-  height: auto;
+  height: 250px;
 }
 
 .add-columns{
@@ -59,9 +59,9 @@ nav:hover{
   align-items: center;
   background-color: var(--button-color);
   color: #ffffff;
-  border-radius: 10px;
-  height: 40px;
-  width: 40px;
+  border-radius: 999px;
+  height: 45px;
+  width: 45px;
   margin-bottom: 5px;
   padding: 5px;
   margin: 0 auto 5px auto;
@@ -80,22 +80,12 @@ li{
   width: 30px;
   list-style: none;
   cursor: pointer;
+  box-shadow: 4px 3px 5px rgba(82, 81, 81, 0.8);
+
 }
 
-.li-light-pink{
-  background-color: var(--light-pink);
-}
-.li-light-blue{
-  background-color: var(--light-blue);
-}
-.li-light-green{
-  background-color: var(--light-green);
-}
-.li-light-malva{
-  background-color: var(--light-malva);
-}
-.li-light-orange{
-  background-color: var(--light-orange);
+li:active{
+  transform: scale(.9);
 }
 
 aside>button{
@@ -155,6 +145,22 @@ section::-webkit-scrollbar{
     background-color: var(--light-green);
   }
 }
+
+
+.light-malva{
+  background-color: var(--light-malva);
+}
+  & .encabezado{
+    background-color: var(--light-malva);
+  }
+
+.light-orange{
+  background-color: var(--light-orange);
+  & .encabezado{
+    background-color: var(--light-orange);
+  }
+}
+
 
 .encabezado {
   display: flex;
