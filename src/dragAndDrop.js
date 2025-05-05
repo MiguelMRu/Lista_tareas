@@ -8,7 +8,6 @@ export function dragDrop() {
             const bottomTask = insertAboverTask(column, e.clientY);
             const draggingTask = document.querySelector('.dragging');
             if(!bottomTask){
-                console.log(draggingTask)
                 column.appendChild(draggingTask);
             } else {
                 bottomTask.parentNode.insertBefore(draggingTask, bottomTask);

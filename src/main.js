@@ -2,6 +2,7 @@ import {dragDrop} from './dragAndDrop.js';
 
 // añadimos las tareas
 const addTaskButton = document.querySelectorAll('.add-task')
+const addColumns = document.querySelectorAll('li')
 
 // Función para crear una nueva tarea
 function createTask() {
@@ -50,7 +51,7 @@ function createTask() {
     return newDiv;
 }
 
-// Añadir evento a cada botón de añadir tarea
+// Añadir tarea
 addTaskButton.forEach((button) => {
     button.addEventListener('click', () => {
         const task = createTask();
@@ -61,7 +62,7 @@ addTaskButton.forEach((button) => {
 });
 
 
-// Función para guardar las tareas en el localStorage
+// Guardar las tareas en el localStorage
 function saveTasks() {
     const tasks = document.querySelectorAll('.tasks');
     const tasksArray = Array.from(tasks).map(task => {
@@ -74,7 +75,7 @@ function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(tasksArray));
 }
 
-// Función para cargar las tareas desde el localStorage
+// Cargar las tareas desde el localStorage
 function loadTasks() {
     const tasks = JSON.parse(localStorage.getItem('tasks'));
     if (tasks) {
@@ -89,7 +90,7 @@ function loadTasks() {
     }
 }
 
-// funcion para crear una nueva columna
+////////////////// funcion para crear una nueva columnas //////////////////////
 
 function createColumn(colorClass) {
     // crear un nuevo section
@@ -100,15 +101,96 @@ function createColumn(colorClass) {
     newColumn.setAttribute('class', 'column')
     newColumn.setAttribute('class', colorClass)
     // darle su contenido 
+   
+    const columnheader = document.createElement('header')
+    columnheader.setAttribute('class','encabezado')
+
+    const delteColumn = deletebutton()
     
-        //encabezado con el nombre
-        //boton de añadir tareas a la derecha
-        //boton de eliminar columna a la izquierda
+    const headerTextElement = headerText()
+    
+    const addTaskButton = addTasks()
+    
+    columnheader.appendChild(delteColumn);
+    columnheader.appendChild(headerTextElement);
+    columnheader.appendChild(addTaskButton);
 
+    newColumn.appendChild(columnheader);
+       
+    console.log(delteColumn)
+    console.log(headerTextElement)
+    console.log(addTaskButton)
 
+    return newColumn
+}
+
+//Boton para borrarr las columnas
+function deletebutton() {
+    const button = document.createElement('button')
+    const buttonImg = document.createElement('img')
+    buttonImg.setAttribute('src','./public/delete.svg')
+    button.setAttribute('class','dlt-column')
+    button.setAttribute('type','button')
+
+    button.appendChild(buttonImg)
+
+    button.addEventListener('click', (e) =>{
+        const parentColumn = e.target.parentElement.parentElement
+        parentColumn.remove()
+
+    })
+    console.log(button)
+
+    return button
 
 }
 
+
+function headerText(){
+    const text = document.createElement('h2')
+    text.setAttribute('contentEditable', 'true');
+    text.textContent = "COLUMNA"
+
+    //text.addEventListener('input',saveColumn())
+
+    return text
+}
+
+function addTasks(){
+    const button = document.createElement('button')
+    const buttonImg = document.createElement('img')
+    buttonImg.setAttribute('src','./public/add.svg')
+    //class="add-task" type="button">
+    button.setAttribute('class','add-task')
+    button.setAttribute('type','button')
+
+    button.appendChild(buttonImg)
+    
+    button.addEventListener('click', (e) => {
+        const task = createTask();
+        const parentColumn = e.target.parentElement.parentElement; // Obtener el section padre de la tarea
+        parentColumn.append(task); // Añadir la tarea a la columna correspondiente
+        saveTasks(); // Guardar tareas al añadir una nueva
+    });
+
+
+    return button
+}
+
+///Funcion para crear una nueva columna
+
+// Añadir tarea
+addColumns.forEach((button) => {
+    button.addEventListener('click', (e) => {
+
+        const buttonClass = e.target.classList[0]; 
+        const column = createColumn(buttonClass);
+        const buttonParent = button.parentElement.parentElement.parentElement; // Obtener el padre hermano de main
+        const main = buttonParent.nextElementSibling
+        main.appendChild(column); // Aladir la columna
+
+    });
+});
 
 dragDrop();
 
