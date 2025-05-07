@@ -1,57 +1,11 @@
 import {dragDrop} from './dragAndDrop.js';
+import {createTask, saveTasks, loadTasks} from './tasks.js'
 
 // añadimos las tareas
 const addTaskButton = document.querySelectorAll('.add-task')
 const addColumns = document.querySelectorAll('li')
 
-// Función para crear una nueva tarea
-function createTask() {
-    const newDiv = document.createElement('div');
-    newDiv.classList.add('tasks');
-    //añadir nuevo id a la tarea segun las tareas que haya
-    newDiv.setAttribute('id', 'task' + (document.querySelectorAll('.tasks').length + 1));
-    newDiv.setAttribute('draggable', 'true');
-    // Añadir evento de arrastrar y soltar
-    newDiv.addEventListener('dragstart', () => {
-        newDiv.classList.add("dragging");
-    });
-    newDiv.addEventListener('dragend', () => {
-        newDiv.classList.remove("dragging");
-        saveTasks(); // Guardar tareas al mover una
-    });
-
-    // Crear los elementos de la tarea
-    const divheader = document.createElement('h3');
-    divheader.textContent = "Tarea...";
-    divheader.setAttribute('contentEditable', 'true');
-
-    const divp = document.createElement('p');
-    divp.textContent = "Descripción...";
-    divp.setAttribute('contentEditable', 'true');
-
-
-
-    // Botón para eliminar la tarea
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
-    deleteButton.classList.add('delete-btn');
-    deleteButton.addEventListener('click', () => {
-        newDiv.remove(); 
-        saveTasks(); 
-
-        
-    });
-
-    //Guardamos el texto de la tarea al cambiarlo
-    divheader.addEventListener('input', saveTasks);
-    divp.addEventListener('input', saveTasks);
-
-    newDiv.append(divheader, divp, deleteButton);
-
-    return newDiv;
-}
-
-// Añadir tarea
+// Añadir tarea a las columnas por defecto
 addTaskButton.forEach((button) => {
     button.addEventListener('click', () => {
         const task = createTask();
@@ -62,33 +16,6 @@ addTaskButton.forEach((button) => {
 });
 
 
-// Guardar las tareas en el localStorage
-function saveTasks() {
-    const tasks = document.querySelectorAll('.tasks');
-    const tasksArray = Array.from(tasks).map(task => {
-        return {
-            title: task.querySelector('h3').textContent,
-            description: task.querySelector('p').textContent,
-            parentId: task.parentElement.id // Guardar el id del div padre
-        };
-    });
-    localStorage.setItem('tasks', JSON.stringify(tasksArray));
-}
-
-// Cargar las tareas desde el localStorage
-function loadTasks() {
-    const tasks = JSON.parse(localStorage.getItem('tasks'));
-    if (tasks) {
-        tasks.forEach(task => {
-            const newTask = createTask();
-            const taskparent = document.getElementById(task.parentId); // Obtener el div padre por id
-            newTask.querySelector('h3').textContent = task.title;
-            newTask.querySelector('p').textContent = task.description;
-            taskparent.append(newTask); // Añadir la tarea al div padre
-
-        });
-    }
-}
 
 ////////////////// funcion para crear una nueva columnas //////////////////////
 
@@ -98,30 +25,58 @@ function createColumn(colorClass) {
     // darle un id
     newColumn.setAttribute('id', 'column' + (document.querySelectorAll('.column').length + 1));
     // darle las clases para el estilo y color
-    newColumn.setAttribute('class', 'column')
-    newColumn.setAttribute('class', colorClass)
+    newColumn.setAttribute('class', 'column' + ' ' + colorClass)
     // darle su contenido 
    
+    const columnheader = addColumnHeader()
+    newColumn.appendChild(columnheader);
+
+
+    newColumn.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        const bottomTask = insertAboverTask(newColumn, e.clientY);
+        const draggingTask = document.querySelector('.dragging');
+        if(!bottomTask){
+            newColumn.appendChild(draggingTask);
+        } else {
+            bottomTask.parentNode.insertBefore(draggingTask, bottomTask);
+        }
+    });
+
+    const insertAboverTask = (newColumn, y) => {
+        const els = newColumn.querySelectorAll('.tasks:not(.dragging)');
+        let closest = null;
+        let closestOffset = Number.NEGATIVE_INFINITY;
+        els.forEach((el) => {
+            const { top } = el.getBoundingClientRect();
+            const offset = y - top;
+            if (offset < 0 && offset > closestOffset) {
+                closestOffset = offset;
+                closest = el;
+
+            }
+        });
+        return closest;
+    };
+
+
+    return newColumn
+}
+
+//
+function addColumnHeader(){
     const columnheader = document.createElement('header')
     columnheader.setAttribute('class','encabezado')
 
     const delteColumn = deletebutton()
-    
     const headerTextElement = headerText()
-    
     const addTaskButton = addTasks()
     
     columnheader.appendChild(delteColumn);
     columnheader.appendChild(headerTextElement);
     columnheader.appendChild(addTaskButton);
 
-    newColumn.appendChild(columnheader);
-       
-    console.log(delteColumn)
-    console.log(headerTextElement)
-    console.log(addTaskButton)
-
-    return newColumn
+    return columnheader
 }
 
 //Boton para borrarr las columnas
@@ -134,12 +89,12 @@ function deletebutton() {
 
     button.appendChild(buttonImg)
 
-    button.addEventListener('click', (e) =>{
-        const parentColumn = e.target.parentElement.parentElement
+    button.addEventListener('click', () =>{
+        const parentColumn = button.parentElement.parentElement
         parentColumn.remove()
+        saveColumn()
 
     })
-    console.log(button)
 
     return button
 
@@ -151,10 +106,39 @@ function headerText(){
     text.setAttribute('contentEditable', 'true');
     text.textContent = "COLUMNA"
 
-    //text.addEventListener('input',saveColumn())
+    text.addEventListener('input',saveColumn)
 
     return text
 }
+
+// Guardar las tareas en el localStorage
+function saveColumn() {
+    const columns = document.querySelectorAll('section');
+    const columnsArray = Array.from(columns).map(column => {
+        return {
+            title: column.querySelector('h2').textContent,
+            Id: column.id,
+            columnClass: column.classList[0],
+            colorClass: column.classList[1]
+        };
+    });
+    localStorage.setItem('columns', JSON.stringify(columnsArray));
+}
+
+
+// Cargar las tareas desde el localStorage
+function loadColumn() {
+    const columns = JSON.parse(localStorage.getItem('columns'));
+    if (columns) {
+        columns.forEach(column => {
+            const newColumn = createColumn(column.colorClass);
+            const main = document.querySelector('main')
+            main.append(newColumn); 
+
+        });
+    }
+}
+
 
 function addTasks(){
     const button = document.createElement('button')
@@ -166,9 +150,9 @@ function addTasks(){
 
     button.appendChild(buttonImg)
     
-    button.addEventListener('click', (e) => {
+    button.addEventListener('click', () => {
         const task = createTask();
-        const parentColumn = e.target.parentElement.parentElement; // Obtener el section padre de la tarea
+        const parentColumn = button.parentElement.parentElement; // Obtener el section padre de la tarea
         parentColumn.append(task); // Añadir la tarea a la columna correspondiente
         saveTasks(); // Guardar tareas al añadir una nueva
     });
@@ -188,6 +172,7 @@ addColumns.forEach((button) => {
         const buttonParent = button.parentElement.parentElement.parentElement; // Obtener el padre hermano de main
         const main = buttonParent.nextElementSibling
         main.appendChild(column); // Aladir la columna
+        saveColumn()
 
     });
 });
@@ -198,3 +183,4 @@ dragDrop();
 
 // Cargar tareas al cargar la página
 window.addEventListener('DOMContentLoaded', loadTasks);
+window.addEventListener('DOMContentLoaded', loadColumn);
