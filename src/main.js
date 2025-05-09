@@ -1,9 +1,13 @@
 import {dragDrop} from './dragAndDrop.js';
-import {createTask, saveTasks, loadTasks} from './tasks.js'
+import {createTask, saveTasks, loadTasks} from './tasks.js';
+import {darkMode} from './darkMode.js'
 
 // añadimos las tareas
 const addTaskButton = document.querySelectorAll('.add-task')
 const addColumns = document.querySelectorAll('li')
+
+//boton de moodo oscuro
+const darkModeButton = document.getElementById("dark-mode")
 
 // Añadir tarea a las columnas por defecto
 addTaskButton.forEach((button) => {
@@ -169,8 +173,7 @@ addColumns.forEach((button) => {
 
         const buttonClass = e.target.classList[0]; 
         const column = createColumn(buttonClass);
-        const buttonParent = button.parentElement.parentElement.parentElement; // Obtener el padre hermano de main
-        const main = buttonParent.nextElementSibling
+        const main = document.querySelector('main')
         main.appendChild(column); // Aladir la columna
         saveColumn()
 
@@ -180,7 +183,10 @@ addColumns.forEach((button) => {
 dragDrop();
 
 
+darkModeButton.addEventListener('click',darkMode)
+
+
 
 // Cargar tareas al cargar la página
-window.addEventListener('DOMContentLoaded', loadTasks);
 window.addEventListener('DOMContentLoaded', loadColumn);
+window.addEventListener('DOMContentLoaded', loadTasks);

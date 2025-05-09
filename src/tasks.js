@@ -64,11 +64,13 @@ export function loadTasks() {
     const tasks = JSON.parse(localStorage.getItem('tasks'));
     if (tasks) {
         tasks.forEach(task => {
+            //console.log(task)
             const newTask = createTask();
-            const taskparent = document.getElementById(task.parentId); // Obtener el div padre por id
+            const taskparent = document.getElementById(task.parentId); // Obtener el padre por id 
+            //console.log(taskparent)
             newTask.querySelector('h3').textContent = task.title;
             newTask.querySelector('p').textContent = task.description;
-            taskparent.append(newTask); // Añadir la tarea al div padre
+            taskparent.appendChild(newTask); // Añadir la tarea al padres
 
         });
     }

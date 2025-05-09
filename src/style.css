@@ -1,13 +1,20 @@
 :root {
-  --light-pink: #e46b91;
-  --light-blue: #6982ca;
-  --light-green: #65d865;  
+  --light-pink: #f596bd;
+  --light-blue: #88a6ff;
+  --light-green: #5bd190;  
   --button-color: #1a1919;
   --light-white: #f6fafc;
-  --light-malva: #a778b6;
-  --light-orange: #f3c5a7;
-  --light-grey: #a9a9a9;
-  
+  --light-malva: #c38bf0;
+  --light-orange: #ffa86e;
+
+
+  /**Variables para dark mode**/
+  --dark-background: #353434;
+  --dark-pink: #d16185;
+  --dark-blue: #2a7592;
+  --dark-green: #2aa375;
+  --dark-malva: #7f54b8;
+  --dark-orange: #db6d29;
 }
 
 
@@ -27,6 +34,10 @@ body{
   font-family: "Outfit",Helvetica, Arial, sans-serif;
 
 
+}
+
+.dark-mode{
+  background-color: var(--dark-background);
 }
 
 aside{
@@ -58,13 +69,13 @@ nav:hover{
   justify-content: center;
   align-items: center;
   background-color: var(--button-color);
-  color: #ffffff;
   border-radius: 999px;
-  height: 45px;
-  width: 45px;
+  height: 2.8em;
+  width: 2.8em;
   margin-bottom: 5px;
   padding: 5px;
   margin: 0 auto 5px auto;
+  z-index: 5;
 }
 
 ul{
@@ -80,7 +91,7 @@ li{
   width: 30px;
   list-style: none;
   cursor: pointer;
-  box-shadow: 4px 3px 5px rgba(82, 81, 81, 0.8);
+
 
 }
 
@@ -128,13 +139,16 @@ section::-webkit-scrollbar{
 /*hacer colores algo más oscuros*/
 .light-pink{
   background-color: var(--light-pink);
+  
   & .encabezado{
     background-color: var(--light-pink);
   }
 }
 
+
 .light-blue{
   background-color: var(--light-blue); /*hacer colores algo más oscuros*/
+  box-shadow: none;
   & .encabezado{
     background-color: var(--light-blue);
   }
@@ -159,6 +173,46 @@ section::-webkit-scrollbar{
   background-color: var(--light-orange);
   & .encabezado{
     background-color: var(--light-orange);
+  }
+}
+
+
+/**dark mode*/
+.dark-pink{
+  background-color: var(--dark-pink);
+  box-shadow: none;
+  & .encabezado{
+    background-color: var(--dark-pink);
+  }
+}
+.dark-blue{
+  background-color: var(--dark-blue); /*hacer colores algo más oscuros*/
+  box-shadow: none;
+
+  & .encabezado{
+    background-color: var(--dark-blue);
+  }
+}
+.dark-green{
+  background-color: var(--dark-green); /*hacer colores algo más oscuros*/
+  box-shadow: none;
+
+  & .encabezado{
+    background-color: var(--dark-green);
+  }
+}
+.dark-malva{
+  background-color: var(--dark-malva);
+  box-shadow: none;
+  & .encabezado{
+    background-color: var(--dark-malva);
+  }
+}
+.dark-orange{
+  background-color: var(--dark-orange);
+  box-shadow: none;
+  & .encabezado{
+    background-color: var(--dark-orange);
   }
 }
 
