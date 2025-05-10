@@ -39,9 +39,9 @@ El objetivo de este proyecto ha sido practicar funcionalidades comunes en aplica
 3. 📝 **Crear y modificar tareas**  
    [📹 Ver video](./readme_resources/Creacion_tareas_y_modificacion.mp4)
 
-4. 🤏 **Drag&Drop**  
+4. 🧲 **Drag&Drop**  
     [📹 Ver video](./readme_resources/drag&drop.mp4)
 
-5. 🌜 **Modo oscuro**  
+5. 🌙 **Modo oscuro**  
     [📹 Ver video](./readme_resources/modo_oscuro.mp4)
 
