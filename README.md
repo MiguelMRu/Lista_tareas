@@ -28,8 +28,6 @@ El objetivo de este proyecto ha sido practicar funcionalidades comunes en aplica
 
 ## 🎥 Demostraciones en Video
 
-> Puedes ver el funcionamiento en estos vídeos que muestran las principales funciones:
-
 1. ✅ **Crear columnas**  
    [📹 Ver video](./readme_resources/Crear_columnas.mp4)
 
@@ -45,3 +43,10 @@ El objetivo de este proyecto ha sido practicar funcionalidades comunes en aplica
 5. 🌙 **Modo oscuro**  
     [📹 Ver video](./readme_resources/modo_oscuro.mp4)
 
+---
+
+## ⚙ Pendiente de mejora
+
+- Eliminar parpadeo Drag&Drop
+- Crear animación al aparecer las columnas
+- Cambiar iconos modo noche
