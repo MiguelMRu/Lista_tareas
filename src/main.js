@@ -87,7 +87,7 @@ function addColumnHeader(){
 function deletebutton() {
     const button = document.createElement('button')
     const buttonImg = document.createElement('img')
-    buttonImg.setAttribute('src','./public/delete.svg')
+    buttonImg.setAttribute('src','/public/delete.svg')
     button.setAttribute('class','dlt-column')
     button.setAttribute('type','button')
 
@@ -147,7 +147,7 @@ function loadColumn() {
 function addTasks(){
     const button = document.createElement('button')
     const buttonImg = document.createElement('img')
-    buttonImg.setAttribute('src','./public/add.svg')
+    buttonImg.setAttribute('src','/public/add.svg')
     //class="add-task" type="button">
     button.setAttribute('class','add-task')
     button.setAttribute('type','button')
